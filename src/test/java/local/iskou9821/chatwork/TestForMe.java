@@ -14,9 +14,8 @@ import org.junit.Test;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
-public class ClientSampleTest {
+public class TestForMe {
 
-	@Ignore
 	@Test
 	public void 自分の情報を取得するテスト() {
 		//下準備としてAPIの動作確認をしてみるテスト。
