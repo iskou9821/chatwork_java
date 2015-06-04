@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static local.iskou9821.chatwork.util.TestTokenProvider.getToken;
 
@@ -14,9 +13,7 @@ public class ContactTest {
 
 	@Test
 	public void コンタクトリストを取得() throws IOException {
-		GetClient client = new GetClient();
-		List<Contact> items = client.list("contacts", Contact.class, getToken());
-		for (Contact item : items) {
+		for (Contact item : new GetClient().list("contacts", Contact.class, getToken())) {
 			System.out.println(ToStringBuilder.reflectionToString(item));
 		}
 	}
