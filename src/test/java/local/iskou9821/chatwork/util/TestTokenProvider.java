@@ -5,11 +5,14 @@ import local.iskou9821.chatwork.token.TokenProvider;
 import local.iskou9821.chatwork.token.impl.PropertyFileTokenProviderImpl;
 
 public class TestTokenProvider {
-
-	public static Token getToken() {
-		TokenProvider provider = new PropertyFileTokenProviderImpl("/var/conf/chatwork.properties");
-		return provider.getToken();
+	public static TokenProvider getTokenProvider() {
+		return new PropertyFileTokenProviderImpl("/var/conf/chatwork.properties");
 	}
 
+
+	public static Token getToken() {
+		TokenProvider provider = getTokenProvider();
+		return provider.getToken();
+	}
 
 }
