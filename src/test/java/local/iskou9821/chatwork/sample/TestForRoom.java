@@ -1,4 +1,4 @@
-package local.iskou9821.chatwork;
+package local.iskou9821.chatwork.sample;
 
 import com.google.common.collect.Lists;
 import com.sun.jersey.api.client.Client;
@@ -10,6 +10,7 @@ import local.iskou9821.chatwork.token.TokenProvider;
 import local.iskou9821.chatwork.token.impl.PropertyFileTokenProviderImpl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class TestForRoom {
 
+	@Ignore
 	@Test
 	public void ルーム一覧を取得() {
 		TokenProvider provider = new PropertyFileTokenProviderImpl("/var/conf/chatwork.properties");
@@ -26,7 +28,7 @@ public class TestForRoom {
 		WebResource resource = client.resource("https://api.chatwork.com/v1/rooms");
 		ClientResponse res =
 				resource.accept(MediaType.APPLICATION_JSON_TYPE)
-						.header("X-ChatWorkToken", provider.getToken()).get(ClientResponse.class);
+						.header("X-ChatWorkToken", provider.getToken().getValue()).get(ClientResponse.class);
 
 		String json = res.getEntity(String.class);
 		ObjectMapper mapper = new ObjectMapper();

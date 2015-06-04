@@ -1,9 +1,10 @@
-package local.iskou9821.chatwork;
+package local.iskou9821.chatwork.sample;
 
+import com.google.common.collect.Lists;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import local.iskou9821.chatwork.model.Me;
+import local.iskou9821.chatwork.model.Contact;
 import local.iskou9821.chatwork.token.TokenProvider;
 import local.iskou9821.chatwork.token.impl.PropertyFileTokenProviderImpl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,26 +14,29 @@ import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.util.List;
 
-public class TestForMe {
+public class TestForContacts {
 
+	@Ignore
 	@Test
-	public void 自分の情報を取得するテスト() {
-		//下準備としてAPIの動作確認をしてみるテスト。
+	public void コンタクトリストを取得() {
 		TokenProvider provider = new PropertyFileTokenProviderImpl("/var/conf/chatwork.properties");
 		Client client = Client.create();
 
-		WebResource resource = client.resource("https://api.chatwork.com/v1/me");
+		WebResource resource = client.resource("https://api.chatwork.com/v1/contacts");
 		ClientResponse res =
 				resource.accept(MediaType.APPLICATION_JSON_TYPE)
-						.header("X-ChatWorkToken", provider.getToken()).get(ClientResponse.class);
+						.header("X-ChatWorkToken", provider.getToken().getValue()).get(ClientResponse.class);
 
 		String json = res.getEntity(String.class);
 		ObjectMapper mapper = new ObjectMapper();
-		Me me = null;
+		List<Contact> list;
 		try {
-			me = mapper.readValue(json, Me.class);
-			System.out.println(ToStringBuilder.reflectionToString(me));
+			list = Lists.newArrayList(mapper.readValue(json, Contact[].class));
+			for (Contact c : list) {
+				System.out.println(ToStringBuilder.reflectionToString(c));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
