@@ -45,6 +45,20 @@ public class EndpointTest {
 
 	@Test
 	public void ルームに投稿() {
+		MessagePostResult r = factory.create(RoomClient.class).postMessage(getMyChat(), "Test Message");
+		System.out.println(ToStringBuilder.reflectionToString(r));
+	}
+
+
+	@Test
+	public void ルームのメッセージを取得() {
+		for (Message c : factory.create(RoomClient.class).getMessageList(getMyChat())) {
+			System.out.println(ToStringBuilder.reflectionToString(c));
+		}
+	}
+
+
+	private Room getMyChat() {
 		Room mychat = null;
 		for (Room r : factory.create(MyInfoClient.class).getRoomList()) {
 			if (r.getName().equals("マイチャット")) {
@@ -52,7 +66,6 @@ public class EndpointTest {
 				break;
 			}
 		}
-		factory.create(RoomClient.class).postMessage(mychat, "Test Message");
+		return mychat;
 	}
-
 }
