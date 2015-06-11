@@ -12,7 +12,7 @@ public class MyTask {
 	@JsonProperty("status") private String status;
 
 	@JsonProperty("room") private MyTaskRoom room;
-	@JsonProperty("assigned_by_account") private MyTaskAssignedBy assignedBy;
+	@JsonProperty("assigned_by_account") private Account assignedBy;
 
 	public String getTaskId() {
 		return taskId;
@@ -62,11 +62,11 @@ public class MyTask {
 		this.room = room;
 	}
 
-	public MyTaskAssignedBy getAssignedBy() {
+	public Account getAssignedBy() {
 		return assignedBy;
 	}
 
-	public void setAssignedBy(MyTaskAssignedBy assignedBy) {
+	public void setAssignedBy(Account assignedBy) {
 		this.assignedBy = assignedBy;
 	}
 }

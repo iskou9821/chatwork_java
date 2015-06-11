@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonTypeName;
 
 @JsonTypeName
-public class MyTaskAssignedBy {
+public class Account {
 	@JsonProperty("account_id") private String accountId;
 	@JsonProperty("name") private String name;
 	@JsonProperty("avatar_image_url") private String avatarImageUrl;
