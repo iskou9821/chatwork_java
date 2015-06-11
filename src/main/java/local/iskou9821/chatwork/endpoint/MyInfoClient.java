@@ -1,9 +1,7 @@
 package local.iskou9821.chatwork.endpoint;
 
 import local.iskou9821.chatwork.client.GetClient;
-import local.iskou9821.chatwork.model.Contact;
-import local.iskou9821.chatwork.model.Me;
-import local.iskou9821.chatwork.model.Room;
+import local.iskou9821.chatwork.model.*;
 import local.iskou9821.chatwork.token.Token;
 
 import java.io.IOException;
@@ -21,6 +19,22 @@ public class MyInfoClient {
 	public Me getMe() {
 		try {
 			return getClient.singleResult("me", Me.class, token);
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	public MyStatus getMyStatus() {
+		try {
+			return getClient.singleResult("my/status", MyStatus.class, token);
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	public List<MyTask> getMyTaskList() {
+		try {
+			return getClient.list("my/tasks", MyTask.class, token);
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
